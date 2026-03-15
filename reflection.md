@@ -5,8 +5,9 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 1. What was broken when you started?
 
 - What did the game look like the first time you ran it?
+  At first sight it appears to be a very basic number guessing game. After a few attempts at playing I quickly encountered a few issues. Some seem harmless and could be fixed by changing one or two lines but others make the game impossible to play. 
 - List at least two concrete bugs you noticed at the start  
-  (for example: "the hints were backwards").
+  From the start, I noticed the feedback after a wrong attempt appeared to be backwards. As I continued making guesses the number to be guessed would randomly change. After, when i explored the different difficulties, I noticed that the ranges for Normal and Hard were inverted. I also noticed that Normal mode allowed more guess attempts than the Easy one. 
 
 ---
 
