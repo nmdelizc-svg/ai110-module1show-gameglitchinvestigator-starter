@@ -1,3 +1,4 @@
+#refactor logic_utils, fixed get_range_for_difficulty.
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -8,7 +9,7 @@ def get_range_for_difficulty(difficulty: str):
         return 1, 100
     return 1, 100
 
-
+#Refactor logic_utils, fixed parse_guess
 def parse_guess(raw: str, low: int, high: int):
     """
     Parse user input into an int guess.
@@ -34,7 +35,7 @@ def parse_guess(raw: str, low: int, high: int):
 
     return True, value, None
 
-
+#Fix bugs in game logic and refactor check_guess to logic_utils
 def check_guess(guess, secret):
     """
     Compare guess to secret and return (outcome, message).
@@ -63,7 +64,7 @@ def check_guess(guess, secret):
     #         return "Too High", "📉 Go LOWER!"
     #     return "Too Low", "📈 Go HIGHER!"
 
-
+#Refactor logic_utils, fixed update_score.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
         points = 100 - 10 * attempt_number

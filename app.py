@@ -81,6 +81,8 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# Bug fix: New game now resets all session state.
+# Previously score, status, and history carried over from the previous game.
 if new_game:
     st.session_state.attempts = 0
     st.session_state.score = 0
@@ -105,9 +107,13 @@ if submit:
         st.session_state.history.append(raw_guess)
         st.error(err)
     else:
+        # Bug fix: attempts only increments on valid guesses.
+        # Previously it incremented before validation, wasting an attempt on bad input.
         st.session_state.attempts += 1
         st.session_state.history.append(guess_int)
 
+        # Bug fix: secret is always passed as int.
+        # Previously it alternated between str and int based on attempt parity, causing incorrect comparisons.
         secret = st.session_state.secret
 
         outcome, message = check_guess(guess_int, secret)
