@@ -90,3 +90,44 @@ def test_empty_input_not_ok():
     ok, value, err = parse_guess("", 1, 100)
     assert ok == False
     assert value is None
+
+
+# --- Bug: parse_guess accepted boundary values inconsistently ---
+# Guesses exactly equal to low or high should be valid (inclusive range)
+
+def test_guess_exactly_at_low_boundary_accepted():
+    ok, value, err = parse_guess("1", 1, 20)
+    assert ok == True
+    assert value == 1
+
+def test_guess_exactly_at_high_boundary_accepted():
+    ok, value, err = parse_guess("20", 1, 20)
+    assert ok == True
+    assert value == 20
+
+def test_guess_one_below_low_boundary_rejected():
+    ok, value, err = parse_guess("0", 1, 20)
+    assert ok == False
+    assert value is None
+
+def test_guess_one_above_high_boundary_rejected():
+    ok, value, err = parse_guess("21", 1, 20)
+    assert ok == False
+    assert value is None
+
+
+# --- Bug: invalid guess (failed parse) was still appended to history ---
+# parse_guess must return ok=False for any invalid input so the caller
+# does not record the attempt in history or increment the attempt counter
+
+def test_out_of_range_guess_returns_false_so_history_not_updated():
+    ok, value, err = parse_guess("999", 1, 20)
+    assert ok == False
+    assert value is None
+    assert err is not None
+
+def test_non_numeric_returns_false_so_history_not_updated():
+    ok, value, err = parse_guess("xyz", 1, 20)
+    assert ok == False
+    assert value is None
+    assert err is not None
