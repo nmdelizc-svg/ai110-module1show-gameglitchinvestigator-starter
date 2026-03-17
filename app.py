@@ -5,7 +5,6 @@ from logic_utils import check_guess, get_range_for_difficulty, parse_guess, upda
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
 st.title("🎮 Game Glitch Investigator")
-st.caption("An AI-generated guessing game. Something is off.")
 
 st.sidebar.header("Settings")
 
@@ -144,4 +143,3 @@ if submit:
                 )
 
 st.divider()
-st.caption("Built by an AI that claims this code is production-ready.")

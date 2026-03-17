@@ -131,3 +131,21 @@ def test_non_numeric_returns_false_so_history_not_updated():
     assert ok == False
     assert value is None
     assert err is not None
+
+
+# --- Edge cases ---
+
+def test_negative_number_rejected():
+    ok, value, err = parse_guess("-5", 1, 20)
+    assert ok == False
+    assert value is None
+
+def test_decimal_truncates_and_accepts():
+    ok, value, err = parse_guess("10.9", 1, 20)
+    assert ok == True
+    assert value == 10
+
+def test_extremely_large_number_rejected():
+    ok, value, err = parse_guess("99999", 1, 20)
+    assert ok == False
+    assert value is None
