@@ -25,9 +25,14 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [Purpose] Glitchy Guesser is a number guessing game built with Streamlit. The player picks a difficulty, which sets the number range and attempt limit. A secret number is generated each round and the player has to guess it within the allowed attempts, getting hints along the way telling them if they went too high or too low. The final score is based on how many attempts it took to win.
+- [Bugs] Most of the bugs were logic issues hiding in plain sight. The hints were completely inverted, with "Too High" telling the player to go higher and "Too Low" telling them to go lower. The Normal and Hard difficulty ranges were also swapped. The secret number kept alternating between an int and a string on even attempts, which broke comparisons entirely. On top of that, the win score was being incremented twice due to a redundant +1, invalid guesses were consuming attempts before input was even validated, and starting a new game only reset some of the state, leaving score and history carrying over from the previous round.
+- [Fixed] 
+-Corrected the hint messages and swapped the difficulty ranges back to their proper values.
+-Removed the int/str alternation so the secret is always stored as an int.
+-Fixed the double increment in update_score and removed the broken Too High/Too Low score logic entirely, leaving score changes only on a win.
+-Moved the attempt counter to after input validation so invalid guesses no longer waste a turn.
+-Added a full state reset on New Game and moved the core functions from app.py into logic_utils.py.
 
 ## 📸 Demo
 
@@ -35,4 +40,4 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+- [(image-1.png)] [Challenge 1: Advanced Edge-Case Testing]
